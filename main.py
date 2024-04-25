@@ -38,8 +38,8 @@ for i in range(4):
                  f"{label_type_dict_info[j]}")
         additional_info_dict[key] = value
 
-for key, value in additional_info_dict.items():
-    print(key, ":", value)
+# for key, value in additional_info_dict.items():
+#     print(key, ":", value)
 
 
 # Function to perform prediction
@@ -51,13 +51,13 @@ def predict_label(image_path):
     image = np.expand_dims(image, axis=0)  # Add batch dimension
 
     # Perform prediction
-    print(image)
+    # print(image)
     predictions_pos = position_model.predict(image)
     predictions_type = type_model.predict(image)
     predictions_healthy = healthy_model.predict(image)
-    print(predictions_pos)
-    print(predictions_type)
-    print(predictions_healthy)
+    # print(predictions_pos)
+    # print(predictions_type)
+    # print(predictions_healthy)
     label_pos_index = np.argmax(predictions_pos)
     label_type_index = np.argmax(predictions_type)
     is_healthy = np.argmax(predictions_healthy)
@@ -82,9 +82,10 @@ def upload_file():
     # result_label.config(text=additional_info)
     if is_healthy:
         result_label.config(text="Brak wykrytego uszkodzenia")
+        additional_info_label.config(text="")
     else:
         result_label.config(text="Wykryto: " + label_type + " " + label_pos)
-    additional_info_label.config(text=additional_info)
+        additional_info_label.config(text=additional_info)
 
 
 # Create the main window
